@@ -21,6 +21,9 @@ def add_product(request):
         form = ProductForm()
     return render(request,'add_product.html',{'form':form})
 
+def testt():
+    print('Hello World')
+
 def all_products(request):
     if request.method =='POST':
             # Перенаправление
