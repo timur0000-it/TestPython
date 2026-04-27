@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                {{field}}
+            </div>
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
+            {% endfor %}
+        {% endfor %}
+        <button>Зарегестрироваться</button>
+    </form>
+    <a href="{% url 'users:signin' %}">Уже есть аккаунт?</a>
+</body>
+</html>
