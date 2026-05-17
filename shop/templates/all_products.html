@@ -1,13 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% for i in all_products %}
-    <p>{{i.title}} {{i.seller_id}}</p>
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <title>All Products</title>  {% endblock %}
+{% block style %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="title">Список товаров</div>
+    <form method="post">
+        {% csrf_token %}
+        <input name="title" type="text">
+        <button>Найти</button>
+    </form>
+    {% for product in all_products %}
+        <div id="ono {{ product.id }}" class="product">
+            <div class="product-title">{{ product.title }}</div>
+            <div class="product-seller">Продавец: {{ product.seller_id }}</div>
+            {% for img in all_images %}
+                {% if img.product_id == product %}
+                    <img src="{{ img.image.url }}" alt="">
+                {% endif %}
+            {% endfor %}
+                 <button id="add {{ product.id }}" class="btn" data-url = "{% url 'shop:add_cart' product.id %}">
+                ➕
+            </button>
+            {% for cart in my_products %}
+                {% if cart.product_id == product %}
+                    <p id="qunt {{ product.id }}">{{ cart.quantity }}</p>
+                    <button id="minus {{ product.id }}" class="btn" data-url = "{% url 'shop:minus_cart' product.id %}">➖
+                </button>
+                
+                
+                {% endif %}
+                {% endfor %}
+            
+    
+        </div>
     {% endfor %}
-</body>
-</html>
+    
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

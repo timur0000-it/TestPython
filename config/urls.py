@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from users.views import signup
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
+    path('', include('users.urls')),
     path('shop/', include('shop.urls')),
 
 ]

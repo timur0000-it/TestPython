@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <title>My Cart</title>  {% endblock %}
+{% block style %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="title">Моя Корзина</div>
+
+    {% for product in my_products %}
+        <div class="product">
+            <a href="/shop/delete_cart/{{ product.product_id.id }}">Удалить полностью</a>
+
+            <div class="product-title">{{ product.product_id }}</div>
+            <div class="product-seller">Количество: {{ product.quantity }}</div>
+            <a href="/shop/minus_cart/{{ product.product_id.id }}">➖</a>
+            <a href="/shop/add_cart/{{ product.product_id.id }}">➕</a>
+            
+                        
+        </div>
+    {% empty %}
+        <div class="empty">Пока нет товаров</div>
+    {% endfor %}
+    <div>
+        <div>Стоимость всех товаров - {{ money }} </div>
+    </div>
+</div>
+{% endblock %}

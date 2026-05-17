@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <title>Signin</title>  {% endblock %}
+{% block style %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block content %}
+
+
+</head>
+<body>
+<div class="container">
+    <div class="title">Пользователи</div>
+
+    {% for i in all_users %}
+        <div class="user">
+            <div class="avatar">
+                {{ i.username|slice:":1"|upper }}
+            </div>
+            <div class="username">{{ i.username }}</div>
+        </div>
+    {% empty %}
+        <div class="empty">Нет пользователей</div>
+    {% endfor %}
+</div>
+{% endblock %}

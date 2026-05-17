@@ -1,0 +1,221 @@
+    * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+
+    }
+    img{
+        width: 250px;
+    }
+
+    main {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .auth-box {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.6s ease;
+    }
+    header{
+        display: flex;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        font-size: 24px;
+        font-weight: 600;
+        gap: 20px;
+
+    }
+    header>a{
+        color: white;
+        text-decoration: none;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    form div {
+        margin-bottom: 18px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        background: #f9fafc;
+        transition: all 0.25s ease;
+    }
+
+    input:focus {
+        background: #fff;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 5px;
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .alert {
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .alert-danger {
+        background: #ffecec;
+        color: #d63031;
+        border: 1px solid #ffbaba;
+    }
+
+    .switch-link {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .switch-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.2s;
+    }
+
+    .switch-link a:hover {
+        text-decoration: underline;
+    }
+    .container {
+        max-width: 700px;
+        margin: auto;
+    }
+
+    .title {
+        color: black;
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .product {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.25s ease;
+    }
+
+    .product:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .product-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .product-seller {
+        font-size: 13px;
+        color: #777;
+    }
+
+    .empty {
+        text-align: center;
+        color: white;
+        font-size: 16px;
+        opacity: 0.8;
+    }
+    
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin-bottom: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.25s ease;
+    }
+
+    .user:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .username {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+    }
+    

@@ -1,25 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-      <form method="post" enctype="multipart/form-data">
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <title>Signin</title>  {% endblock %}
+{% block style %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block content %}
+<div class="auth-box">
+    <div class="title">Вход</div>
+
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        
         {% for field in form %}
             <div>
                 <label for="{{field.id_for_label}}">{{field.label}}</label>
                 {{field}}
             </div>
+
             {% for error in field.errors %}
-            <div class="alert alert-danger">
-                {{error}}
-            </div>
+                <div class="alert alert-danger">
+                    {{error}}
+                </div>
             {% endfor %}
         {% endfor %}
+
         <button>Войти</button>
     </form>
-</body>
-</html>
+    </div>
+
+{% endblock %}

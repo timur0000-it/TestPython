@@ -7,7 +7,12 @@ from .models import AbstractUser,Seller,CustomerUser
 from .forms import SignUpForm,SignInForm
 import random
 # Create your views here.
-
+def login_required(func):
+    def wrapper(request,*args,**kwargs):
+        if request.user.is_authenticated:
+            return func(request,*args,**kwargs)
+        return redirect('users:signin')
+    return wrapper
 def signup(request):
     if request.method =='POST':
         form = SignUpForm(request.POST, request.FILES)
@@ -20,8 +25,7 @@ def signup(request):
             user.parol = number2
             user.save()
             gmail(user)
-            login(request,user)
-            return redirect('shop:all_products')
+            return redirect('users:get_all_users')
     else:
         form = SignUpForm()
     return render(request,'signup.html',{'form':form})
@@ -35,7 +39,7 @@ def signin(request):
             user = authenticate(request,username=username,password=password)
             if user is not None:
                 login(request,user)
-                return redirect('shop:all_products')
+                return redirect('users:get_all_users')
             else:
                 print(user)
                 error_message = 'Неверный логин или пороль'
@@ -43,14 +47,14 @@ def signin(request):
     else:
         form = SignInForm()
     return render(request,'signin.html',{'form':form})
-
+@login_required
 def signout(request):
     logout(request)
     return redirect('users:signin')    
 
 def gmail(user):
     subject = 'Поздравляем с регистрацией'
-    message = f'Привет , {user.username}! рады приветствовать на нашем сайте код {user.parol} http://127.0.0.1:8000/users/kod/{user.username}'
+    message = f'Привет , {user.username}! рады приветствовать на нашем сайте код {user.parol} http://127.0.0.1:8000/parol/{user.username}'
     to_email = user.email
     send_mail(
             subject=subject,
@@ -58,8 +62,13 @@ def gmail(user):
             from_email=None,
             recipient_list=[to_email]
             )
+@login_required
+def get_all_users(request):
+    all_users = CustomerUser.objects.all()
+    return render(request,'get_all_users.html',{'all_users':all_users})
     
-def kod(request,username):
+    
+def parol(request,username):
     if request.method == 'POST':
         code = request.POST.get('code')
         user = CustomerUser.objects.get(username=username)
@@ -67,7 +76,7 @@ def kod(request,username):
             user.is_active=True
             user.save()
             login(request,user)
-            return redirect('shop:all_products')
+            return redirect('users:get_all_users')
     return render(request,'parol.html')
     # user.is_active = True
     # user.save()
