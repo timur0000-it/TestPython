@@ -1,40 +1,31 @@
-
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} <title>Signin</title>  {% endblock %}
+{% block title %} <title>Code</title>  {% endblock %}
 {% block style %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
 
 {% block content %}
-
 <div class="auth-box">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-danger">
-            {{ message }}
-                </div>
-    {% endfor %}
-{% endif %}
-    <div class="title">Вход</div>
-
+    <div class="title">Code</div>
+    {{err}}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
         {% for field in form %}
             <div>
                 <label for="{{field.id_for_label}}">{{field.label}}</label>
+                
                 {{field}}
             </div>
 
-            {% for error in field.errors %}
-                <div class="alert alert-danger">
+        {% endfor %}
+        {% if error %}
+            <div class="alert alert-danger">
                     {{error}}
                 </div>
-            {% endfor %}
-        {% endfor %}
-
-        <button>Войти</button>
+        {% endif %}
+        <button>Проверить</button>
     </form>
     </div>
-
+    
 {% endblock %}

@@ -30,11 +30,14 @@ class SignUpForm(forms.ModelForm):
         password = self.cleaned_data.get('password_1')
         user.set_password(password) 
         user.save()
-        if user.is_seller():
+        if user.is_seller:
             Seller.objects.create(user=user)
         return user
        
 class SignInForm(forms.Form):
     username = forms.CharField(max_length=150,required=True,label='Имя пользователя')
     password = forms.CharField(required=True,max_length=150,label='Пароль')
-    
+
+class ActivationCodeForms(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'readonly':'readonly'}),required=False)
+    code = forms.CharField(max_length=4,min_length=4,label='Код (4 цифры)')

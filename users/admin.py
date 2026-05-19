@@ -10,5 +10,5 @@ class SellerAdmin(admin.ModelAdmin):
 @admin.register(CustomerUser)
 class CategoryAdmin(admin.ModelAdmin):
     model = CustomerUser
-    list_display=('username','role','phone_number',)
-    list_editable = ('role',)
+    list_display=('username','role','phone_number','email',)
+    list_editable = ('role','email',)

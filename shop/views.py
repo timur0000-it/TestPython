@@ -2,6 +2,8 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.contrib import messages
+
 # LOCAL
 from .models import Product,Category,Cart,ProductImages
 from .forms import ProductForm,CartForm
@@ -10,6 +12,9 @@ from users.views import login_required
 
 @login_required
 def add_product(request):
+    if request.user.is_customer() or request.user == None:
+        messages.warning(request, 'Только для продавцов')
+        return redirect('users:signin')
     if request.method =='POST':
         form = ProductForm(request.POST,request.FILES)
         if form.is_valid():
@@ -19,8 +24,6 @@ def add_product(request):
             if form.cleaned_data.get('image_field')!=None:
                 ProductImages.objects.create(product_id=product,is_main=True,image=form.cleaned_data.get('image_field'))
                 return redirect('shop:all_products')
-        else:
-            print(form.errors)
         return render(request,'add_product.html',{'form':form})
  
     else:

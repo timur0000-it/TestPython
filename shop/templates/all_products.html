@@ -6,6 +6,11 @@
 {% block style %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
 
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
 <div class="container">
     <div class="title">Список товаров</div>
     <form method="post">
