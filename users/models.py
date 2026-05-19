@@ -11,7 +11,7 @@ class CustomerUser(AbstractUser):
                   ('seller',"Продавец"))
     role = models.CharField(max_length=20,choices=USER_ROLES, default='customer')
     phone_number = models.CharField(max_length=32,blank=False,null=False)
-    
+
     def is_customer(self):
         return self.role == 'customer'
     @property
@@ -55,6 +55,7 @@ class ActivationCode(models.Model):
         if self.used:
             return False, 'код использован'
         if timezone.now() > self.expiers_at:
+            self.delete()
             return False, 'Время и стекло'
         if self.attemps>max_attemps:
             self.delete()

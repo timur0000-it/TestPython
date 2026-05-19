@@ -66,6 +66,7 @@ def verify_code(request):
             user_code = ActivationCode.objects.filter(user=user1).first()
             if not user_code:
                 user1.delete()
+                messages.warning(request, 'Вы не подтвердили код пожайлуста зарегестрируйтесь заново')
                 return redirect('users:signin')  
             activation = user_code.check_code(code)
             if activation[0] == True:
