@@ -30,8 +30,6 @@ class SignUpForm(forms.ModelForm):
         password = self.cleaned_data.get('password_1')
         user.set_password(password) 
         user.save()
-        if user.is_seller:
-            Seller.objects.create(user=user)
         return user
        
 class SignInForm(forms.Form):

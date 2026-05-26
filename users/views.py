@@ -62,8 +62,8 @@ def verify_code(request):
         if form.is_valid():
             code = form.cleaned_data.get('code','')
             email = request.session['active_email']
-            user1 = CustomerUser.objects.filter(email=email).first()
-            user_code = ActivationCode.objects.filter(user=user1).first()
+            user1 = CustomerUser.objects.filter(email=email).order_by('-date_joined').first()
+            user_code = ActivationCode.objects.filter(user=user1).order_by('-created_at').first()
             if not user_code:
                 user1.delete()
                 messages.warning(request, 'Вы не подтвердили код пожайлуста зарегестрируйтесь заново')
@@ -72,6 +72,8 @@ def verify_code(request):
             if activation[0] == True:
                 user1.is_active=True
                 user1.save()
+                if user1.is_seller == True:
+                    Seller.objects.create(user=user1)
                 login(request,user1)
                 messages.success(request, 'Поздравляем с регистрацией')
                 return redirect('shop:all_products')

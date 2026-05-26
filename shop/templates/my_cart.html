@@ -15,8 +15,7 @@
 
             <div class="product-title">{{ product.product_id }}</div>
             <div class="product-seller">Количество: {{ product.quantity }}</div>
-            <a href="/shop/minus_cart/{{ product.product_id.id }}">➖</a>
-            <a href="/shop/add_cart/{{ product.product_id.id }}">➕</a>
+
             
                         
         </div>
@@ -26,5 +25,7 @@
     <div>
         <div>Стоимость всех товаров - {{ money }} </div>
     </div>
+    <a href="/shop/create_order">Перейти к оплате</a>
 </div>
+<script src="{% static 'js/cart.js' %}"></script>
 {% endblock %}
