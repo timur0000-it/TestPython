@@ -136,6 +136,8 @@ DEAFAULT_FROM_EMAIL = os.getenv('DEAFAULT_FROM_EMAIL')
 
 EMAIL_USE_TLS = True
 
+STRIPE_PUBLISHED_KEY = os.getenv('STRIPE_PUBLISHED_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
 
 # Default primary key field type

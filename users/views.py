@@ -6,7 +6,7 @@ from django.contrib import messages
 # LOCAL
 from .models import AbstractUser,Seller,CustomerUser,ActivationCode
 from .forms import SignUpForm,SignInForm,ActivationCodeForms
-import random
+from .signals import check_registration
 # Create your views here.
 def login_required(func):
     def wrapper(request,*args,**kwargs):
@@ -88,4 +88,10 @@ def verify_code(request):
     return render(request,'verify_code.html',{'form':form})
 
 
-
+def re_send_code(request):
+    email = request.session['active_email']
+    user1 = CustomerUser.objects.filter(email=email).order_by('-date_joined').first()
+    user_code = ActivationCode.objects.filter(user=user1).order_by('-created_at').first()
+    user_code.delete()
+    check_registration(sender=CustomerUser,instance=user1,created=True)
+    return redirect('users:verify_code')

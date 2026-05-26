@@ -7,7 +7,7 @@
 {% block content %}
 <div class="auth-box">
     <div class="title">Code</div>
-    {{err}}
+    <a href="{% url 'users:re_send_code' %}">Новый код</a>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
